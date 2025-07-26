@@ -4,20 +4,17 @@ let boxOnLeft = true;
 
 const textMap = {
 	zh: {
-		label: "IP: ",
-		fetching: "获取中...",
+		label: "获取中...",
 		close: "关闭",
 		toggle: "切换位置",
 	},
 	en: {
-		label: "IP: ",
-		fetching: "Fetching...",
+		label: "Fetching...",
 		close: "Close",
 		toggle: "Switch position",
 	},
 	ja: {
-		label: "IP: ",
-		fetching: "取得中...",
+		label: "取得中...",
 		close: "閉じる",
 		toggle: "位置切替",
 	},
@@ -33,7 +30,7 @@ const TEXT = getLangText();
 
 function updatePageWithIP(ip) {
 	const ipLabel = document.getElementById("ip-label");
-	ipLabel.textContent = `${TEXT.label}${ip}`;
+	ipLabel.textContent = ip;
 }
 
 function getEffectiveBackgroundColor(element) {
@@ -84,17 +81,12 @@ function drawBox() {
 	const box = document.createElement("div");
 	box.id = "show-remote-ip";
 	box.innerHTML = `
-		<span id="ip-label">${TEXT.label}${TEXT.fetching}</span>
+		<span id="ip-label">${TEXT.label}</span>
 		<button id="ip-toggle">⇄</button>
 		<button id="ip-close">×</button>
 	`;
-
-	// setting colors
-	box.style.background = bgColor;
-	box.style.color = fgColor;
-	box.querySelectorAll("button").forEach((btn) => {
-		btn.style.color = fgColor;
-	});
+	box.style.setProperty("--bg-color", bgColor);
+	box.style.setProperty("--fg-color", fgColor);
 
 	document.body.appendChild(box);
 
@@ -113,7 +105,7 @@ function sendMessageSafely(message, callback) {
 			if (chrome.runtime.lastError) {
 				console.error(
 					"[show-remote-ip] Message sending failed:",
-					chrome.runtime.lastError,
+					chrome.runtime.lastError.message,
 				);
 				if (callback) callback(null);
 			} else {
@@ -126,18 +118,20 @@ function sendMessageSafely(message, callback) {
 	}
 }
 
-async function requestCurrentIP() {
+function requestCurrentIP() {
 	sendMessageSafely({ action: "getIP" }, (response) => {
 		const ip = response?.ip;
 		if (ip) {
 			updatePageWithIP(ip);
+		} else {
+			setTimeout(requestCurrentIP, 500);
 		}
 	});
 }
 
 async function start() {
 	drawBox();
-	return requestCurrentIP();
+	requestCurrentIP();
 }
 
 if (document.readyState === "loading") {

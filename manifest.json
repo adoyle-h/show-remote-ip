@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "Show Remote IP",
-	"description": "Displays the server IP that is currently accessing, supports multi-language and floating window position switching. 显示当前访问网页的服务器 IP，支持多语言与浮窗位置切换。",
+	"description": "A chrome extension that displays the server IP that is currently accessing, supports multi-language and floating window position switching. 显示当前访问网页的服务器 IP，支持多语言与浮窗位置切换。",
 	"version": "1.0",
 	"icons": {
 		"16": "./icon_16.png",

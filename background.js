@@ -21,10 +21,6 @@ chrome.webRequest.onCompleted.addListener(
 				tabId: details.tabId,
 			};
 
-			if (siteIPs.size > 1000) {
-				clearCache();
-			}
-
 			siteIPs.set(details.tabId, ipInfo);
 		}
 	},
@@ -46,6 +42,8 @@ async function handleGetIP(message, sender, sendResponse) {
 			timestamp: ipInfo ? ipInfo.timestamp : null,
 			url: tab.url,
 		});
+
+		siteIPs.delete(tab.id);
 	} catch (error) {
 		sendResponse({ error: error.message });
 	}
