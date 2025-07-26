@@ -1,0 +1,28 @@
+{
+	"manifest_version": 3,
+	"name": "Show Remote IP",
+	"description": "Displays the server IP that is currently accessing, supports multi-language and floating window position switching. 显示当前访问网页的服务器 IP，支持多语言与浮窗位置切换。",
+	"version": "1.0",
+	"icons": {
+		"16": "./icon_16.png",
+		"32": "./icon_32.png",
+		"48": "./icon_48.png",
+		"64": "./icon_64.png",
+		"128": "./icon_128.png"
+	},
+	"permissions": ["webRequest", "activeTab", "scripting"],
+	"host_permissions": ["<all_urls>"],
+	"background": {
+		"service_worker": "background.js"
+	},
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": ["content.js"],
+			"css": ["style.css"]
+		}
+	],
+	"action": {
+		"default_title": "Show Remote IP"
+	}
+}
