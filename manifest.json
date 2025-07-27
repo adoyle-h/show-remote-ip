@@ -2,7 +2,7 @@
 	"manifest_version": 3,
 	"name": "Show Remote IP",
 	"description": "Displays the server IP that is currently accessing",
-	"version": "1.1",
+	"version": "1.2.0",
 	"icons": {
 		"16": "icon_16.png",
 		"32": "icon_32.png",
