@@ -8,6 +8,10 @@ A chrome extension that displays the server IP that is currently accessing, supp
 
 <img width="362" height="124" alt="Image" src="https://github.com/user-attachments/assets/1f5d5167-144f-41d3-a547-97020ff485cc" />
 
+## Install
+
+Install extension from [chrome webstore](https://chromewebstore.google.com/detail/show-remote-ip/abbfelabgbandnfajkpfdlljcehfgdng).
+
 ## Suggestion, Bug Reporting, Contributing
 
 **Before opening new Issue/Discussion/PR and posting any comments**, please read [Contributing Guidelines](https://gcg.adoyle.me/CONTRIBUTING).
